@@ -3,12 +3,12 @@
     <label for="text">
         <p>Text</p>
         <textarea id="text"></textarea>
-        <button>Copy</button>
+        <button class="copy" data-textarea-id="text">Copy</button>
     </label>
     <label for="scream">
         <p>Scream</p>
         <textarea id="scream"></textarea>
-        <button>Copy</button>
+        <button class="copy" data-textarea-id="scream">Copy</button>
     </label>
     <details>
         <summary>What?</summary>
@@ -16,13 +16,15 @@
         <img src="/xkcd.png" alt="" />
     </details>
     <br />
-    <a href="https://github.com/suhankins/scream-cipher">Made by Punished Bernadetta</a>
+    <a href="https://github.com/suhankins/scream-cipher"
+        >Made by Punished Bernadetta</a
+    >
 </div>
 
 <style>
-	details {
-		margin-top: 2ch;
-	}
+    details {
+        margin-top: 2ch;
+    }
     .container {
         background-color: var(--background-1);
         padding: 20px;
@@ -37,6 +39,18 @@
 
 <script>
     import { DICTIONARY } from '../lib/dictionary';
+
+    document.querySelectorAll('.copy').forEach((button) => {
+        button.addEventListener('click', (event) => {
+            const id = (event.target as HTMLButtonElement).dataset.textareaId;
+            if (!id) {
+                return;
+            }
+            navigator.clipboard.writeText(
+                (document.querySelector(`#${id}`) as HTMLTextAreaElement).value
+            );
+        });
+    });
 
     document.querySelector('#text')?.addEventListener('input', (event) => {
         const output = document.querySelector('#scream') as HTMLTextAreaElement;
