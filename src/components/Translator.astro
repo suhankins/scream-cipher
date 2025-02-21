@@ -1,0 +1,62 @@
+<div class="container">
+    <h1>Scream Cypher</h1>
+    <label for="text">
+        <p>Text</p>
+        <textarea id="text"></textarea>
+        <button>Copy</button>
+    </label>
+    <label for="scream">
+        <p>Scream</p>
+        <textarea id="scream"></textarea>
+        <button>Copy</button>
+    </label>
+    <details>
+        <summary>What?</summary>
+        <p><a href="https://xkcd.com/3054/">https://xkcd.com/3054/</a></p>
+        <img src="/xkcd.png" alt="" />
+    </details>
+</div>
+
+<style>
+	details {
+		margin-top: 2ch;
+	}
+    .container {
+        background-color: var(--background-1);
+        padding: 20px;
+        border-radius: 20px;
+        min-width: 60ch;
+    }
+    textarea {
+        min-width: 100%;
+        min-height: 5em;
+    }
+</style>
+
+<script>
+    import { DICTIONARY } from '../lib/dictionary';
+
+    document.querySelector('#text')?.addEventListener('input', (event) => {
+        const output = document.querySelector('#scream') as HTMLTextAreaElement;
+        if (!output) {
+            return;
+        }
+        let value = (event.target as HTMLTextAreaElement).value;
+        DICTIONARY.forEach((pair) => {
+            value = value.replaceAll(pair.letter, pair.cipher);
+        });
+        output.value = value;
+    });
+
+    document.querySelector('#scream')?.addEventListener('input', (event) => {
+        const output = document.querySelector('#text') as HTMLTextAreaElement;
+        if (!output) {
+            return;
+        }
+        let value = (event.target as HTMLTextAreaElement).value;
+        DICTIONARY.forEach((pair) => {
+            value = value.replaceAll(pair.cipher, pair.letter);
+        });
+        output.value = value;
+    });
+</script>
