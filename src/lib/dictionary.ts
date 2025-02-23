@@ -13,6 +13,7 @@ export const DICTIONARY = [
     { letter: 'L', cipher: 'Ă' },
     { letter: 'M', cipher: 'Ǎ' },
     { letter: 'N', cipher: 'Å' },
+    { letter: 'O', cipher: 'Å' },
     { letter: 'P', cipher: 'A̯' },
     { letter: 'Q', cipher: 'A̤' },
     { letter: 'R', cipher: 'Â' },
